@@ -23,14 +23,14 @@ public class AuthFilter implements Filter {
 
         if(Objects.nonNull(httpReq)){
             HttpSession session = httpReq.getSession();
-            boolean isExist = (Boolean) session.getAttribute("user");
-            if(!isExist || !Objects.nonNull(isExist)){
+            if(!Objects.nonNull(session.getAttribute("user"))) {
                 httpRes.sendRedirect("/login.jsp");
-            }else{
-                chain.doFilter(request,response);
             }
+            chain.doFilter(request,response);
+
         }
     }
+
 
     @Override
     public void destroy() {
